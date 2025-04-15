@@ -1,27 +1,13 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Настройка страницы на широкий режим
-st.set_page_config(layout="wide")
+# st.write('Привет')
 
-# Пользовательский CSS для удаления отступов
-st.markdown(
-    """
-    <style>
-    .st-emotion-cache-1jicfl2 {
-        width: 100%;
-        padding: 6rem 1rem 10rem;
-        min-width: auto;
-        max-width: initial;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+path = 'https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv'
+tips = pd.read_csv(path)
 
-st.title("YouTube видео")
+st.dataframe(tips.head(10))
 
-# URL-адрес YouTube видео
-youtube_url = "https://youtu.be/0kJvUyRfZXI"
-
-# Отображение видео с автовоспроизведением
-st.video(youtube_url, autoplay=True, muted=False)
+st.area_chart(tips, x='total_bill', y='tip', color='day')
